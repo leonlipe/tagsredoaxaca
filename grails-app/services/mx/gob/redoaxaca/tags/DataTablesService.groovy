@@ -149,7 +149,7 @@ class DataTablesService {
 
 		params.sSearch =  DataTablesService.removeCaracteres(params.sSearch)
         def filtersSearch = []
-        propertiesToFilter.each { prop -> filtersSearch << "cast(${prop} as " + casttext + ") like '%" + params.sSearch.toUpperCase() + "%'"}
+        propertiesToFilter.each { prop -> filtersSearch << "upper(cast(${prop} as " + casttext + ")) like '%" + params.sSearch.toUpperCase() + "%'"}
         def filterSearch = filtersSearch.join(" OR ")
 
 
@@ -270,7 +270,7 @@ class DataTablesService {
 		params.sSearch  = params.sSearch.replaceAll(" ", "%");
 		
 		def filtersSearch = []
-		propertiesToFilter.each { prop -> filtersSearch << "cast(${prop} as " + casttext + ") like '%"  +params.sSearch.toUpperCase()+"%'"}
+		propertiesToFilter.each { prop -> filtersSearch << "upper(cast(${prop} as " + casttext + ")) like '%"  +params.sSearch.toUpperCase()+"%'"}
 		def filterSearch = filtersSearch.join(" OR ")
 
         
@@ -619,6 +619,7 @@ class DataTablesService {
      * @param casttext El cast del texto en la base de datos, depende del manejador, por ejemplo as TEXT, etc.
      * @return Un mapa con las propiedades a mostrar en la tabla, es responsabilidad del controlador convertirlo a la salida apropiada, por ejemplo JSON.
      * */
+	
     def datosParaTablaQuerySingleFieldSearch(String consulta, def params, def propertiesToRender, def propertiesToFilter,def order, def casttext) {
         def sQueryParaDatos ="select  "
         def sQueryParaCuentas =" select  count(*) as contador  "+consulta

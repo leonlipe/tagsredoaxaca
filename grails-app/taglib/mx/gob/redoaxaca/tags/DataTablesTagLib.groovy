@@ -69,13 +69,10 @@ class DataTablesTagLib {
             attrs.action = attrs.action +(prevParams?"&":"?") +"whereadicional="+attrs.whereadicional
         }
 
-
         def js = "<script type='text/javascript'>"
         js += "var oTable;"
         js += "\$(document).ready(function() {oTable = \$('#${attrs.ctrlid}').dataTable({"
         //js += "sScrollY: '70%',"
-
-
 
         js += "bProcessing: true,"
         js += "bServerSide: true,"
